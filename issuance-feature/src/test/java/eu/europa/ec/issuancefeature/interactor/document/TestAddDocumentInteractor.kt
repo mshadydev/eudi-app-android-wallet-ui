@@ -36,6 +36,8 @@ import eu.europa.ec.commonfeature.util.TestsData.mockedSampleDataOptionItemUi
 import eu.europa.ec.commonfeature.util.TestsData.mockedSuccessContentDescription
 import eu.europa.ec.commonfeature.util.TestsData.mockedSuccessSubtitle
 import eu.europa.ec.commonfeature.util.TestsData.mockedSuccessTitle
+import eu.europa.ec.commonfeature.util.TestsData.mockedUniCertOptionItemUi
+import eu.europa.ec.commonfeature.util.TestsData.mockedUniCertNameSpace
 import eu.europa.ec.commonfeature.util.TestsData.mockedUriPath1
 import eu.europa.ec.corelogic.controller.AddSampleDataPartialState
 import eu.europa.ec.corelogic.controller.IssuanceMethod
@@ -153,6 +155,9 @@ class TestAddDocumentInteractor {
                             mockedPhotoIdOptionItemUi.copy(
                                 available = false
                             ),
+                            mockedUni.copy(
+                                available = false
+                            ),
                             mockedSampleDataOptionItemUi
                         )
                     ),
@@ -187,7 +192,8 @@ class TestAddDocumentInteractor {
                             mockedPidOptionItemUi,
                             mockedMdlOptionItemUi,
                             mockedAgeOptionItemUi,
-                            mockedPhotoIdOptionItemUi
+                            mockedPhotoIdOptionItemUi,
+                            mockedUniCertOptionItemUi
                         )
                     ),
                     awaitItem()

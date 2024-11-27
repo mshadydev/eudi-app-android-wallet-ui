@@ -26,6 +26,7 @@ private const val mockedDocUiNamePid = "National ID"
 private const val mockedDocUiNameMdl = "Driving License"
 private const val mockedDocUiNameAgeVerification = "Age Verification"
 private const val mockedDocUiNamePhotoId = "Photo ID"
+private const val mockedDocUiNameUniCert = "University Certificate"
 private const val mockedDocUiNameSampleData = "Load Sample Documents"
 
 @VisibleForTesting(otherwise = VisibleForTesting.NONE)
@@ -47,11 +48,11 @@ object MockResourceProviderForStringCalls {
         whenever(resourceProvider.getString(R.string.age_verification))
             .thenReturn(mockedDocUiNameAgeVerification)
 
-        whenever(resourceProvider.getString(R.string.age_verification))
-            .thenReturn(mockedDocUiNameAgeVerification)
-
         whenever(resourceProvider.getString(R.string.photo_id))
             .thenReturn(mockedDocUiNamePhotoId)
+
+        whenever(resourceProvider.getString(R.string.uni_cert))
+            .thenReturn(mockedDocUiNameUniCert)
     }
 
     /**

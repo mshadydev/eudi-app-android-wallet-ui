@@ -217,7 +217,7 @@ class TestFormValidator {
         )
         validateForm(
             rules = rules,
-            value = "eudi-openid4vp%3A%2F%2Fdev.verifier-backend.eudiw.dev%3Fclient_id%3Ddev.verifier-backend.eudiw.dev%26request_uri%3Dhttps%3A%2F%2Fdev.verifier-backend.eudiw.dev%2Fwallet%2Frequest.jwt%2F1234",
+            value = "eudi-openid4vp%3A%2F%2F192.168.91.100:4200%3Fclient_id%3D192.168.91.100:4200%26request_uri%3Dhttps%3A%2F%2F192.168.91.100:4200%2Fwallet%2Frequest.jwt%2F1234",
             expectedValidationResult = validationSuccess
         )
         validateForm(
@@ -232,7 +232,7 @@ class TestFormValidator {
         )
         validateForm(
             rules = rules,
-            value = "eudi-openid4vp://dev.verifier-backend.eudiw.dev?client_id=dev.verifier-backend.eudiw.dev&request_uri=https://dev.verifier-backend.eudiw.dev/wallet/request.jwt/1234",
+            value = "eudi-openid4vp://192.168.91.100:4200?client_id=192.168.91.100:4200&request_uri=https://192.168.91.100:4200/wallet/request.jwt/1234",
             expectedValidationResult = validationSuccess
         )
         validateForm(

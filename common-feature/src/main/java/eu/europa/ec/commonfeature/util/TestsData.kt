@@ -68,12 +68,14 @@ object TestsData {
     const val mockedMdlId = "000002"
     const val mockedAgeVerificationId = "000003"
     const val mockedPhotoId = "000004"
+    const val mockedUniCertId = "000005"
     const val mockedUserFirstName = "JAN"
     const val mockedUserBase64Portrait = "SE"
     const val mockedDocUiNamePid = "National ID"
     const val mockedDocUiNameMdl = "Driving License"
     const val mockedDocUiNameAge = "Age Verification"
     const val mockedDocUiNamePhotoId = "Photo ID"
+    const val mockedDocUiNameUniCert = "University Certificate"
     const val mockedDocUiNameSampleData = "Load Sample Documents"
     const val mockedNoUserFistNameFound = ""
     const val mockedNoUserBase64PortraitFound = ""
@@ -106,6 +108,8 @@ object TestsData {
     const val mockedAgeVerificationNameSpace = "eu.europa.ec.eudi.pseudonym.age_over_18.1"
     const val mockedPhotoIdDocType = "org.iso.23220.2.photoid.1"
     const val mockedPhotoIdNameSpace = "org.iso.23220.2.photoid.1"
+    const val mockedUniCertNameSpace = "eu.europa.ec.eudi.unicert.1"
+    const val mockedUniCertDocType = "eu.europa.ec.eudi.2.unicert.1"
 
     const val mockedUriPath1 = "eudi-wallet://example.com/path1"
     const val mockedUriPath2 = "eudi-wallet://example.com/path2"
@@ -199,6 +203,37 @@ object TestsData {
             DocItem(
                 namespace = mockedPhotoIdNameSpace,
                 elementIdentifier = "issuing_country",
+            ),
+        ),
+        readerAuth = mockedValidReaderAuth
+    )
+
+    val mockedUnveristyCertificateWithBasicFieldsDocRequest = DocRequest(
+        docType = mockedUniCertDocType,
+        requestItems = listOf(
+            DocItem(
+                namespace = mockedUniCertNameSpace,
+                elementIdentifier = "student_id"
+            ),
+            DocItem(
+                namespace = mockedUniCertNameSpace,
+                elementIdentifier = "university_name"
+            ),
+            DocItem(
+                namespace = mockedUniCertNameSpace,
+                elementIdentifier = "degree_program"
+            ),
+            DocItem(
+                namespace = mockedUniCertNameSpace,
+                elementIdentifier = "graduation_date"
+            ),
+            DocItem(
+                namespace = mockedUniCertNameSpace,
+                elementIdentifier = "issuance_date"
+            ),
+            DocItem(
+                namespace = mockedUniCertNameSpace,
+                elementIdentifier = "expiry_date"
             ),
         ),
         readerAuth = mockedValidReaderAuth
@@ -486,6 +521,13 @@ object TestsData {
         available = true
     )
 
+    val mockedUniCertOptionItemUi = DocumentOptionItemUi(
+        text = mockedDocUiNameUniCert,
+        icon = AppIcons.Id,
+        type = DocumentIdentifier.UNICERT,
+        available = true
+    )
+
     val mockedSampleDataOptionItemUi = DocumentOptionItemUi(
         text = mockedDocUiNameSampleData,
         icon = AppIcons.Id,
@@ -649,6 +691,12 @@ object TestsData {
                         value = testFieldUi.value
                     )
 
+                    is DocumentIdentifier.UNICERT -> mockCreateOptionalFieldForUniverstyCertificate(
+                        docId = transformedRequestDataUi.documentId,
+                        elementIdentifier = testFieldUi.elementIdentifier,
+                        value = testFieldUi.value
+                    )
+
                     is DocumentIdentifier.SAMPLE, is DocumentIdentifier.OTHER -> throw NotSupportedDocumentTypeException
                 }
 
@@ -715,6 +763,25 @@ object TestsData {
         val uniqueId = mockedPhotoIdDocType + elementIdentifier + docId
         return mockCreateOptionalField(
             documentIdentifierUi = DocumentIdentifier.PHOTOID,
+            uniqueId = uniqueId,
+            elementIdentifier = elementIdentifier,
+            value = value,
+            checked = checked,
+            enabled = enabled,
+            event = Event.UserIdentificationClicked(itemId = uniqueId)
+        )
+    }
+
+    private fun mockCreateOptionalFieldForUniverstyCertificate(
+        docId: String,
+        elementIdentifier: String,
+        value: String,
+        checked: Boolean = true,
+        enabled: Boolean = true,
+    ): RequestDataUi.OptionalField<Event> {
+        val uniqueId = mockedUniCertDocType + elementIdentifier + docId
+        return mockCreateOptionalField(
+            documentIdentifierUi = DocumentIdentifier.UNICERT,
             uniqueId = uniqueId,
             elementIdentifier = elementIdentifier,
             value = value,
@@ -828,6 +895,13 @@ object TestsData {
                 docId = mockedPhotoId
                 docType = mockedPhotoIdDocType
                 docRequest = mockedPhotoIdWithBasicFieldsDocRequest
+            }
+
+            is DocumentIdentifier.UNICERT -> {
+                namespace = mockedUniCertNameSpace
+                docId = mockedUniCertId
+                docType = mockedUniCertDocType
+                docRequest = mockedUnveristyCertificateWithBasicFieldsDocRequest
             }
 
             is DocumentIdentifier.SAMPLE, is DocumentIdentifier.OTHER -> throw NotSupportedDocumentTypeException
